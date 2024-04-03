@@ -19,6 +19,7 @@ Inês Guedes
 <p></p>
 
 ## Introduction
+<p><p>
 In the DevOps class we were challenged to work with Gradle. This repository is the result of the work developed in the context of the second assignment of the class.
 The repository is organized as follows:
 
@@ -28,19 +29,21 @@ The repository is organized as follows:
 <p></p>
 Firstly, I started by cloning the repository and creating the folders for the assignment.
 Then, I created a README.md draft file in each folder and pushed the changes to the repository by adding the files and committing them with a message attached to the respective issue.
-
+<p>
+ 
 ```bash
-*	cd C:\Users\inesc\Documents\Class\devops-23-24-JPE-1231831
+*	  cd C:\Users\inesc\Documents\Class\devops-23-24-JPE-1231831
 *   mkdir CA2 + cd CA2
 *   mkdir Part1 + cd Part1
-*	git clone https://bitbucket.org/pssmatos/gradle_basic_demo/
-*	cd C:\Users\inesc\Documents\Class\devops-23-24-JPE-1231831
-*	git echo "devops-23-24-JPE-1231831" README.md
-*	mv README.md CA2 + cd CA2 + mv README.md Part1 + cd Part1
-              (did the same for Part2)
-*	git add . + git commit -m "#Issue Add xxx" + git push
+*	  git clone https://bitbucket.org/pssmatos/gradle_basic_demo/
+*	  cd C:\Users\inesc\Documents\Class\devops-23-24-JPE-1231831
+*	  git echo "devops-23-24-JPE-1231831" README.md
+*	  mv README.md CA2 + cd CA2 + mv README.md Part1 + cd Part1
+                  (did the same for Part2)
+*	  git add . + git commit -m "#Issue Add xxx" + git push
 ```
-
+<p><p>
+ 
 ## 2. Development: Experimenting with Gradle
 <p></p>
 Afterwards I started experimenting with Gradle according to the instructions of the README.md file in the repository.
@@ -48,7 +51,8 @@ I started by running the gradle wrapper command to check the version of Gradle.
 Then, I ran the gradle build command to build the project and checked the output, as well as the gradle runClient command to run the client and the gradle runServer command to run the server.
 For that, I started the server on the same port as the client (59001) as it was indicated on the project, before running the client.
 I also started another client with the same gradle task to check if the server was able to handle multiple clients.
-
+<p>
+ 
 ```bash
 To build a .jar file with the application:
 
@@ -92,7 +96,7 @@ After adding the task, I executed the server with the following command:
 <p></p>
 
 ```bash
-./gradlew runServer
+*   ./gradlew runServer
 ```
 <p></p>
 
@@ -108,8 +112,8 @@ Then, I added a new test method to the ServerAppTest class to test the server's 
 <p>
 
    ```bash
-   mkdir -p src/test/java/basic_demo (-p creates multiple directories at once)
-   touch src/test/java/basic_demo/ChatServerAppTest.java
+*   mkdir -p src/test/java/basic_demo (-p creates multiple directories at once)
+*   touch src/test/java/basic_demo/ChatServerAppTest.java
    ```
 
 <p></p>
@@ -200,8 +204,8 @@ Then I executed the task, commited the changes and pushed them to the repository
 <p>
 
 ```bash
-* ./gradlew build
-* ./gradlew zipArchive
+*   ./gradlew build
+*   ./gradlew zipArchive
 ```
 <p></p>
 
