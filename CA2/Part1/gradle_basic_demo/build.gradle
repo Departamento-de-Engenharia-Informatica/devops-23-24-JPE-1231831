@@ -64,8 +64,15 @@ task runServer(type:JavaExec, dependsOn: classes){
 
     classpath = sourceSets.main.runtimeClasspath
 
-
     mainClass = 'basic_demo.ChatServerApp'
 
     args '59001'
+}
+
+task copySources (type: Copy){
+    group = "DevOps"
+    description = "Backup of the sources of the application"
+
+    from 'src/'
+    into 'backup/'
 }
