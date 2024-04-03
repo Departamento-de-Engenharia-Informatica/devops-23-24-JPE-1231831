@@ -1,7 +1,8 @@
 <strong>Repository:</strong> devops-23-24-JPE-PSM-1231831
  <p></p>
 
-# Class Assignment 1
+# Class Assignment 2 - Part 1
+ <p></p>
 
 <p></p>
 
@@ -18,7 +19,8 @@ Inês Guedes
 <p></p>
 
 ## Introduction
-In the DevOps class we were challenged to work with Git.
+In the DevOps class we were challenged to work with Gradle. This repository is the result of the work developed in the context of the second assignment of the class.
+The repository is organized as follows:
 
 <p></p>
 
@@ -27,9 +29,11 @@ In the DevOps class we were challenged to work with Git.
 Repository Creation.
 
 ```bash
-*	git add README.md
-*	git commit -m “Commit 1: Teste”
-*	git branch -M main
-*	git remote ad origin git@github.com: Departamento-de-Engenharia-Informatica/devops-23-24-JPE-1231831.git
-*	git push -u origin main (-u automatically associates a local branch with its remote counterpart)>
+*	git clone repository
+*	mkdir CA2 + cd CA2 + mkdir Part1 + cd Part1
+*	git echo "devops-23-24-JPE-PSM-1231831" README.md
+*	mv README.md CA2 + cd CA2 + mv README.md Part1 + cd Part1
+              (did the same for Part2)
+*	git add . + git commit -m "#Issue Add xxx" + git push
+
 ```
