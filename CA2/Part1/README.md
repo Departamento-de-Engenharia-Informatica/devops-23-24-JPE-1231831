@@ -20,8 +20,8 @@ Inês Guedes
 
 ## Introduction
 <p><p>
-In the DevOps class we were challenged to work with Gradle. This repository is the result of the work developed in the context of the second assignment of the class.
-The repository is organized as follows:
+In the DevOps class we were challenged to work with Gradle. This repository is the result of the work developed in the context of the second assignment part 1 of the class.
+The repository is organized as it follows:
 
 <p></p>
 
