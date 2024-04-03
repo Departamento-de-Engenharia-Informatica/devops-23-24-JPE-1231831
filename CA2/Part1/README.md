@@ -57,16 +57,24 @@ I also started another client with the same gradle task to check if the server w
 To build a .jar file with the application:
 
 *   ./gradlew build 
+````
 
+<p>
+ 
+````bash
 To open a terminal and execute the following command from the project's root directory:
 
 * java -cp build/libs/basic_demo-0.1.0.jar basic_demo.ChatServerApp 59001
+````
 
+<p>
+
+````bash
 To start a client with the gradle task:
 
 * ./gradlew runClient
-
 ````
+
 <p></p>
 
 I also added a task to the end of the build.gradle file to execute the server:
@@ -209,7 +217,7 @@ Then I executed the task, commited the changes and pushed them to the repository
 ```
 <p></p>
 
-## 6. Conclusion: Add Tag and Push
+## 6. Conclusion: Tag and Push
 <p>
 To conclude, I was able to successfully complete the assignment by following the instructions provided in the README.md file of the repository.
 So, in the end, I marked the repository with the tag ca2-part1 and pushed the changes with a message attached to the respective issue.
