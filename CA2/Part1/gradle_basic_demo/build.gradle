@@ -76,3 +76,12 @@ task copySources (type: Copy){
     from 'src/'
     into 'backup/'
 }
+
+task zipArchive (type: Zip){
+    group = "DevOps"
+    description = "Zip archive of the sources of the application"
+
+    from 'src'
+    archiveFileName = 'zipArchive.zip'
+    destinationDirectory = file('backup/')
+}
