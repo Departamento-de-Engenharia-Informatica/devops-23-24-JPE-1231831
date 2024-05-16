@@ -25,7 +25,11 @@ The main goal of this assignment is to implement virtualization methods for tran
 
 <p></p>
 
-## 1. Tutorial: Creation of the Virtual Machine
+## Tutorial: 
+<p></p>
+<p></p>
+
+### 1. Creation of the Virtual Machine
 
 <p></p>
 Firstly, I downloaded the VirtualBox from the Oracle website (https://www.virtualbox.org/). Afterwards, I created my virtual machine and through its setup I selected "Linux" as the type and "Ubuntu 64bit" (Ubuntu 22.04.3 version) as the version with atleast 2048 MB of RAM and 20 GB of disk space. Later on I downloaded the Ubuntu Server ISO file (https://ubuntu.com/download/server) and on the option to choose a disk file in Optical Drive I alocated the downloaded ISO file. Then, I proceeded with the Ubuntu instalation with the standard options.
@@ -33,13 +37,13 @@ Firstly, I downloaded the VirtualBox from the Oracle website (https://www.virtua
 <p></p>
 <p></p>
 
-## 2. Tutorial: Configuring the Virtual Machine
+### 2. Configuring the Virtual Machine
 <p></p>
 Considering that the VirtualBox automatically sets up a network adapter in NAT mode and establishes an interface for a host-only network, on the "Host Network Manager" I created a new host-only network and on "Network Adapter 2" I turned it to be a "Host-Only Adapter". Then, I assigned a static IP within the range of the host-only network (192.168.56.1/24), ensuring direct communication between the host and the guest without needing to set up port forwarding.
 
 <p></p>
 <p></p>
-** Setting up the Virtual Machine - IP:
+** Setting up the IP:
 
 <p></p>
 to define a static ip in this ip range I used the following steps: <p></p>
@@ -48,7 +52,6 @@ to define a static ip in this ip range I used the following steps: <p></p>
 *	 sudo apt update - updates the package repositories
 * sudo apt install net-tools
 *	sudo nano /etc/netplan/01-netcfg.yaml
-<p></p>
 Adding to the file:
 * network:
         version: 2
@@ -59,12 +62,24 @@ Adding to the file:
             enp0s8:
                 addresses:
                     - 192.168.56.5/24
-<p></p>
 * sudo netplan apply - to apply the changes
 ```
-<p></p>
 
 <p></p>
+<p></p>
+Afterwards I installed the openssh-server and enabled password authentication:  <p></p>
+
+```bash
+* sudo apt install openssh-server
+* Enable password authentication in the SSH configuration and restart SSH service
+* sudo systemctl restart ssh
+```
+
+<p></p>
+
+
+** Accessing the Virtual Machine:
+
 
 ## 2. CA1 Step-by-Step:
 
