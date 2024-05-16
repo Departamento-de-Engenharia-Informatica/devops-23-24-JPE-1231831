@@ -3,7 +3,7 @@
 <strong>Repository:</strong> devops-23-24-JPE-PSM-1231831
  <p></p>
 
-# Class Assignment 1
+# Class Assignment 3 - Part 1
 
 <p></p>
 
@@ -20,28 +20,50 @@ Inês Guedes
 <p></p>
 
 ## Introduction
-In the DevOps class we were challenged to work with Git for version control with and without branches. Additionally, it was proposed that we should document a detailed workflow and the issues encountered at it during the development process.
-Thus, with the goal of following on this approach, I intend to summarize all the actions taken, step-by-step, and the recommendations for resolving the consequent encountered errors.
+In the DevOps class for the Class Assignment 3 (CA3), we will emphasize the usage of VirtualBox and Vagrant to leverage virtualization.
+The main goal of this assignment is to implement virtualization methods for transferring and executing previous project work within a virtualized Ubuntu environment. This configuration will replicate the development setup consistently across various platforms, guaranteeing that all features and requirements are handled uniformly and separately from the host platforms.
 
 <p></p>
 
-## 1. Tutorial: Analysis, Design and Implementation
+## 1. Tutorial: Creation of the Virtual Machine
+
 <p></p>
-Repository Creation: With the aim of starting the 1st part of the assignment CA1, a repository had to be created. <p></p>
-Therefore, I manually created a new one on GitHub named “devops-23-24-JPE-1231831” and classified it as private. Afterwards, I accessed my Documents using “cd ~/Documents” and, with the “mkdir Devops” command, I created the Devops folder on my Documents.<p></p>
-Upon entering the folder Devops with “cd Devops” command, I cloned the repository on GiHub named “tut-react-and-spring-data-rest”. On this stage, I could’ve have used “winget install -e –id GNU Nano” to install the GNU Nano text editor using the Windows Package Manager (winget) and then “touch .gitignore” and “nano .gitignore” so as to create a file name .gitignore on the current directory and then add the files for the Git repositor to ignore on Intellij IDEA tool (https://www.toptal.com/developers/gitignore/api/intellij) when tracking changes, although, upon the manual creation of the repository on GitHub, the .gitignore was already created. The .gitignore file is important to avoid inclusion of any unnecessary files in the repository.<p></p>
-Later on, a README file was created for the work documentation using “echo “# devops-23-24-JPE-1231831” >>README.md”.<p></p>
-Then, I used the “git init” command to initialize a new empty repository that when was run it created a .git hidden folder that stored all the information that Git needed to track for the projects versions. To add the readme file to the GitHub “devops-23-24-JPE-1231831” repository I implemented the following steps:<p></p>
+Firstly, I downloaded the VirtualBox from the Oracle website (https://www.virtualbox.org/). Afterwards, I created my virtual machine and through its setup I selected "Linux" as the type and "Ubuntu 64bit" (Ubuntu 22.04.3 version) as the version with atleast 2048 MB of RAM and 20 GB of disk space. Later on I downloaded the Ubuntu Server ISO file (https://ubuntu.com/download/server) and on the option to choose a disk file in Optical Drive I alocated the downloaded ISO file. Then, I proceeded with the Ubuntu instalation with the standard options.
+
+<p></p>
+<p></p>
+
+## 2. Tutorial: Configuring the Virtual Machine
+<p></p>
+Considering that the VirtualBox automatically sets up a network adapter in NAT mode and establishes an interface for a host-only network, on the "Host Network Manager" I created a new host-only network and on "Network Adapter 2" I turned it to be a "Host-Only Adapter". Then, I assigned a static IP within the range of the host-only network (192.168.56.1/24), ensuring direct communication between the host and the guest without needing to set up port forwarding.
+
+<p></p>
+<p></p>
+** Setting up the Virtual Machine - IP:
+
+<p></p>
+to define a static ip in this ip range I used the following steps: <p></p>
 
 ```bash
-*	git add README.md
-*	git commit -m “Commit 1: Teste”
-*	git branch -M main
-*	git remote ad origin git@github.com: Departamento-de-Engenharia-Informatica/devops-23-24-JPE-1231831.git
-*	git push -u origin main (-u automatically associates a local branch with its remote counterpart)>
+*	 sudo apt update - updates the package repositories
+* sudo apt install net-tools
+*	sudo nano /etc/netplan/01-netcfg.yaml
+<p></p>
+Adding to the file:
+* network:
+        version: 2
+        renderer: networkd
+        ethernets:
+            enp0s3:
+                dhcp4: yes
+            enp0s8:
+                addresses:
+                    - 192.168.56.5/24
+<p></p>
+* sudo netplan apply - to apply the changes
 ```
 <p></p>
-Since the manual repository created had the VisualStudio Code as the pre-defined tool to use, I also used the “git config –global core.editor “idea –wait” command to change it to the Intellij IDEA tool.
+
 <p></p>
 
 ## 2. CA1 Step-by-Step:
