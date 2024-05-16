@@ -47,7 +47,7 @@ Considering that the VirtualBox automatically sets up a network adapter in NAT m
 #### Setting up the IP:
 
 <p></p>
-to define a static ip in this ip range I used the following steps: <p></p>
+To define a static ip in this ip range I used the following steps: <p></p>
 
 ```bash
 *	 sudo apt update - updates the package repositories
