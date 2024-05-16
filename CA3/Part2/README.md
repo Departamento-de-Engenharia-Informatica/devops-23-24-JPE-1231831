@@ -186,6 +186,7 @@ Then, I downloaded and set up the H2 Database server and Apache Tomcat version 1
 When downloading Apache Tomcat, its important to set up its permissions. The latest, it grants permissions recursively (-R) to the user (u) for all files and directories within the extracted Apache Tomcat directory using chmod.
 
 <p></p>
+
 ```bash
 #Shell provisioner downloads Apache Tomcat 10.1.23 and extracted into the current directory.
 
@@ -203,6 +204,7 @@ sudo chmod -R u+x apache-tomcat-10*
 
 SHELL
 ```
+
 <p></p>
 
 ```bash
@@ -211,6 +213,7 @@ web.vm.provision "shell", :run => 'always', inline: <<-SHELL
    ./apache-tomcat-10*/bin/startup.sh
 SHELL
 ```
+
 <p></p>
 
 When its finished, cloning of the Git repository is necessary such as modifying configurations, building the project, and deploying the WAR file to Tomcat. <p></p>
@@ -233,6 +236,7 @@ web.vm.provision "shell", inline: <<-SHELL, privileged: false
 
  sudo cp ./build/libs/react-and-spring-data-rest-basic-0.0.1-SNAPSHOT.war ~/apache-tomcat-10*/webapps/
 ```
+
 <p></p>
 <p></p>
 
@@ -265,6 +269,7 @@ config.vm.define "db" do |db|
 With Qemu, Vagrant doesn't automatically download the machine image so instead, a script was added to download the image before running the vagrant up command.
 The rest of the steps to run it remain identical to those for VirtualBox already described:
  <p></p>
+ 
 ```bash
  config.vm.provision "shell", run: 'once', inline: <<-SHELL
     if [ ! -f ubuntu2004.img ]; then
