@@ -94,7 +94,7 @@ After the connection, it shows the system status information such as memory usag
 #### Instalation of Virtual Machine tools:
 
 <p></p>
-** Installing Java:
+** Installing Java **
 <p></p>
 
 ```bash
@@ -102,7 +102,7 @@ After the connection, it shows the system status information such as memory usag
 * sudo apt install openjdk-8-jdk-headless
 ```
 <p></p>
-** Installing Git:
+** Installing Git **
 <p></p>
 
 ```bash
@@ -110,7 +110,7 @@ After the connection, it shows the system status information such as memory usag
 ```
 <p></p>
 
-** Installing Maven/Gradle:
+** Installing Maven/Gradle **
 <p></p>
 
 ```bash
@@ -168,7 +168,7 @@ Then I built and executed the CA2_Part2 project: <p></p>
 ```
 <p></p>
 <p></p>
-To check again if the app was running correctly through the web browser, on the search bar I typed:
+To check again if the app was running correctly through the web browser, on the search bar I typed: <p></p>
 
 ```bash
 *  192.168.56.5:8080
@@ -188,10 +188,12 @@ To create the new CA3 project folder, I executed the following steps: <p></p>
 ```
 <p></p>
 And then I needed to create a tag ca3-part1: <p></p>
+
 ```bash
 * git tag ca3-part1
 * git push origin ca3-part1
 ```
+ 
  <p></p>
   <p></p>
    <p></p>
