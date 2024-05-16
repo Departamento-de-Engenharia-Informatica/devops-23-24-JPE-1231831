@@ -187,7 +187,9 @@ To create the new CA3 project folder, I executed the following steps: <p></p>
 * touch README.md
 ```
 <p></p>
-And then I needed to create a tag ca3-part1: <p></p>
+And then I needed to create a tag ca3-part1 on my repository. Firstly I did it through the web by accessing the Tags page and create a new Release with the newly created tag ca3-part1.
+If I wanted to do it like the other assignments, I should do the following steps:
+<p></p>
 
 ```bash
 * git tag ca3-part1
