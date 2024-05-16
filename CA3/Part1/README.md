@@ -43,7 +43,8 @@ Considering that the VirtualBox automatically sets up a network adapter in NAT m
 
 <p></p>
 <p></p>
-** Setting up the IP:
+
+#### Setting up the IP:
 
 <p></p>
 to define a static ip in this ip range I used the following steps: <p></p>
@@ -78,143 +79,121 @@ Afterwards I installed the openssh-server and enabled password authentication:  
 <p></p>
 
 
-** Accessing the Virtual Machine:
-
-
-## 2. CA1 Step-by-Step:
-
-### 1st Part of CA1:
+#### Accessing the Virtual Machine:
 <p></p>
-Using PowerShell I wrote the following commands:<p></p>
+I accessed the Virtual Machine session via SSH: <p></p>
 
-<ol>
-  <li> Copy the code of the Tutorial React.js and Spring Data REST Application into a new folder named CA1:
-<ul>
- <p></p>
-  </ul>
-
- ```bash
-
-  *	On the “Devops” folder I created CA1 folder - mkdir CA1
-  * Copied the tut basic folder to CA1 – cp -r tut-react-and-spring-data-rest/basic CA1
-  *	Copied the tut pom file – cp tut-react-and-spring-data-rest/pom.xml CA1
-
- ```
-
-   <p></p>
-</li>
-<li>.	Commit the Tutorial React.js and Spring Data REST Application changes and push them:
- <ul>
-
-  ```bash
-  * Entered CA1 folder - cd CA1
-  * Initilialized empty git repository: git init
-  * Added the files – git add basic // git add pom.xml
-  * Escrevi mensagem de commit: git commit -m “1 first commit”
-  * Fiz push dos ficheiros para o main branch – git push origin main 
-
- ```
-
-</ul>
-</li>
- <p></p>
-<li>	Tag the initial version as v1.1.0 and push it to the server:
-<ul>
-
-   ```bash
- 
-  * git tag v1.1.0	 
-  * git push origin v1.1.0
-
-  ```
-
-</ul>
-</li>
- <p></p>
-<li> Add new JobYears field to the company employee: <p></p>
-
-* For this, I manually added the basic folder as an Intellij IDEA project and implemented the attribute “int jobYears” to the Employee class, changed its constructor and added a getter, setter and validations (jobYears <0). Subsequently I tested the added code with success and insuccess tests for the validations along with constructor and toString testing.
- </li>
-<p></p>	
-<li>Commit the code, push it and create a new tag v1.2.0 (I associated the commit to the issues created on GitHub repository):
- <ul>
-
-  ```bash
-
-  * git add basic/src/main/java/com/greglturnquist/payroll/DatabaseLoader.java
-  * git add basic/src/main/java/com/greglturnquist/payroll/Employee.java
-  * git add basic/src/test/java/EmployeeTest.java
-  * git commit -m “#2 Commit 2: JobYears Implementation + Testing”
-  * git push origin main
-  * git tag v.1.2.0
-  * push origin v.1.2.0
-  * git status (to confirm if the process went well)
-
-  ```
-
- </ul>
-</li>
-<p></p>
-<li>	At the end of the 1st part of the assignment, mark the repository with the tag ca1-part1:
- <ul>
-
-  ```bash
-
-* git tag ca1-part1
-* git push origin ca1-part1
-* git tag (to confirm if the process went well)
-
+```bash
+* ssh ines@192.168.64.5
 ```
+ <p></p>
+After the connection, it shows the system status information such as memory usage, system load, and available updates. Then, I procced to install the other tools.
+ <p></p>
+ <p></p>
 
-</ul>
- </li>
- </ol>
-  <p></p>
-  <p></p>
+#### Instalation of Virtual Machine tools:
 
-### 2nd Part of CA1:
 <p></p>
-Using PowerShell I wrote the following commands:<p></p>
-<ol>
+** Installing Java:
+<p></p>
 
- <li>Create a branch named “email-field”:
- <ul>
+```bash
+* sudo apt update - To ensure everything is in order
+* sudo apt install openjdk-8-jdk-headless
+```
+<p></p>
+** Installing Git:
+<p></p>
 
-  ```bash
+```bash
+* sudo apt install git 
+```
+<p></p>
 
-    * git checkout main
-    * git merge main (to check if everything was up to date)
-    * git checkout -b email-field
+** Installing Maven/Gradle:
+<p></p>
 
- ```
+```bash
+* sudo apt install maven
+* sudo apt install gradle
+```
+<p></p>
+<p></p>
 
-  </ul>
-</li>
- <p></p>
-<li>	Add a new email field to the application:<p></p>
+#### Cloning the Repository:
+<p></p>
+I procceded to clone the repository containing my project.: <p></p>
 
-* Implemented the attribute “String email” to the Employee class, changed its constructor and added a getter, setter and validations (email == null || !email.matches (“[A-Za-z0-9+_.-]+@(.+$)). Subsequently I tested the added code with success and insuccess tests for the validations along with constructor and toString testing.
+```bash
+* git clone git@github.com:Departamento-de-Engenharia-Informatica/devops-23-24-JPE-1231831.git
+```
+<p></p>
+<p></p>
+Afterwards I built and executed the CA1 (spring-boot tutorial basic) project: <p></p>
 
-</li>
- <p></p>
-<li>	Commit the code, push it and create a new tag v1.3.0 (I associated the commit to the issues created on GitHub repository):
- <ul>
+```bash
+* cd CA1/basic
+* chmod +x mvnw - configures maven wrapper to grant it execution permissions
+* -/mvnw compile - compiles the project running
+* ./mvnw spring-boot:run - starts the SpringBoot application
+```
+<p></p>
+<p></p>
+To check if the app was running correctly, I accessed it through the host machine's web browser by using the virtual machines IP address and the port configured in the project. 
+It started with the port 8080 (default Tomcat server port).<p></p>
 
-  ```bash
+```bash
+* ip addr
+```
+<p></p>
+<p></p>
+Then I built and executed the CA2_Part1 (chat app) project: <p></p>
 
-   * git add basic/src/main/java/com/greglturnquist/payroll/DatabaseLoader.java
-   * git add basic/src/main/java/com/greglturnquist/payroll/Employee.java
-   * git add basic/src/test/java/EmployeeTest.java
-   * git commit -m “#3 Email Implementation”
-   * git push origin main
-   * git tag v.1.3.0
-   * push origin v.1.3.0
-   * git status (to confirm if the process went well)
-
+```bash
+* cd CA2/Part1/gradle_basic_demo
+* chmod +x gradlew - give execute permmitions to gradle wrapper script
+* ./gradlew build - to ensure all Gradle dependencies are set up properly
+* ./gradlew runServer
+* gradlew runClient --args="192.168.56.5 59001" - executes runClient" task with the port 59001
   ```
+<p></p>
+<p></p>
+Then I built and executed the CA2_Part2 project: <p></p>
+   
+```bash
+* cd CA2/Part2/react-and-spring-data-rest-basic
+* chmod +x gradlew - configures gradle wrapper to grant it execution permissions
+* ./gradlew build
+* ./gradlew bootRun
+```
+<p></p>
+<p></p>
+To check again if the app was running correctly through the web browser, on the search bar I typed:
 
-</ul>
-</li>
+```bash
+*  192.168.56.5:8080
+```
+<p></p>
+<p></p>
+
+#### Creating CA3 folder:
+<p></p>
+To create the new CA3 project folder, I executed the following steps: <p></p>
+
+```bash
+* cd ~/Devops-23-24-JPE-1231831
+* mkdir CA3
+* cd CA3
+* touch README.md
+```
+<p></p>
+And then I needed to create a tag ca3-part1: <p></p>
+```bash
+* git tag ca3-part1
+* git push origin ca3-part1
+```
  <p></p>
-<li>	Create branches for fixing bugs, merge it into master and create a new tag v1.3.1
- <ul>
+  <p></p>
+   <p></p>
+    <p></p>
+    
