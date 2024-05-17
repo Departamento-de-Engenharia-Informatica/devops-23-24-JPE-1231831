@@ -36,13 +36,13 @@ The repository is organized as it follows:
 <p><p>
 2. Generate a new gradle spring boot project on the recommended site (https://start.spring.io/) by choosing the dependencies which will be working on:
  <p><p>
-     - Rest Repositories -> When the "Rest Repositories" dependency is added to the Spring Boot project, it essentially taps into the power of Spring Data REST. This module takes care of exposing the JPA repositories as RESTful endpoints without having to dive into the writing of controller code.
-  <p><p>
-     - *Thymeleaf* -> Thymeleaf is a contemporary Java-based template engine designed to simplify the creation of dynamic web pages.
-  <p><p>  
-   - JPA -> The JPA (Java Persistence API) dependency is like the bridge between your Java application and your relational database. When included in the project, it essentially taps into a standardized way of managing relational data in the Java application.
-  <p><p>
-     - H2 -> H2 stands out as a swift, freely accessible, in-memory database entirely crafted in Java. It allows to build and experiment with applications without the having to set up a separate database server.
+           - Rest Repositories -> When the "Rest Repositories" dependency is added to the Spring Boot project, it essentially taps into the power of Spring Data REST. This module takes care of exposing the JPA repositories as RESTful endpoints without having to dive into the writing of controller code.
+        <p><p>
+           - Thymeleaf -> Thymeleaf is a contemporary Java-based template engine designed to simplify the creation of dynamic web pages.
+        <p><p>  
+         - JPA -> The JPA (Java Persistence API) dependency is like the bridge between your Java application and your relational database. When included in the project, it essentially taps into a standardized way of managing relational data in the Java application.
+        <p><p>
+           - H2 -> H2 stands out as a swift, freely accessible, in-memory database entirely crafted in Java. It allows to build and experiment with applications without the having to set up a separate database server.
 <p><p>
  <p><p>
 3. Generate the dependencies and download the project, by extracting the files to the CA2 Part2 folder.
