@@ -1,59 +1,90 @@
-# Class Assignment 2
+<strong>Repository:</strong> devops-23-24-JPE-PSM-1231831
+ <p></p>
+
+# Class Assignment 2 - Part 2
+ <p></p>
+
+<p></p>
+
+<strong>Student: </strong>
+Inês Guedes
+ <p></p>
+
+<strong>Number:</strong>
+1231831
+<p></p>
+<p></p>
+<p></p>
 
 ## Introduction
+<p><p>
+In the DevOps class we were challenged to work with Gradle. This repository is the result of the work developed in the context of the second assignment part 2 of the class.
+The repository is organized as it follows:
 
-Using our personal repositories and a simple Gradle application to add new functionality was the aim of this class assignment. The objective is to learn how to change the build and comprehend how a gradle wrapper functions, despite the fact that the capabilities are basic.Gradle file
-The final result of the assignment can be found [here](https://github.com/PedroMSFernandes5/DevOps-23-24-JPE-1231850).
+<p></p>
 
-## Table of Contents
+## Tutorial
+<p></p>
+<p></p>
 
-1. [Getting Started](#Getting-started)
-2. [Implementing Changes](#Implementing-Changes)
-    - [Part 1: Adding the frontend plugin](#Part-1-Adding-the-frontend-plugin)
-    - [Part 2: Adding the copyJar task](#Part-2-Adding-the-copyJar-task)
-    - [Part 3: Adding the deleteWebpackFiles task](#Part-3-Adding-the-deleteWebpackFiles-task)
-    - [Part 4: Merging the branches](#Part-4-Merging-the-branches)
-3. [Issues](#Issues)
-4. [Alternative implementation solution](#Alternative-implementation-solution)
-5. [Final Remarks](#Final-Remarks)
-
-
-## Getting Started
-
-The first step is to create a new branch called "tut-basic-gradle" in the repository to work on the assignment. To do so, open a git bash and type in the command:
+### 1. Application conversion to Gradle
+<p></p>
+1. Create a new branch called "tut-basic-gradle" in the repository and switch to it:
+<p>
+ 
 ```bash
-git branch tut-basic-gradle
+* git branch tut-basic-gradle
+* git checkout tut-basic-gradle
 ```
+<p><p>
+<p><p>
+2. Generate a new gradle spring boot project on the recommended site (https://start.spring.io/) by choosing the dependencies which will be working on:
+ <p><p>
+     - Rest Repositories -> When the "Rest Repositories" dependency is added to the Spring Boot project, it essentially taps into the power of Spring Data REST. This module takes care of exposing the JPA repositories as RESTful endpoints without having to dive into the writing of controller code.
+  <p><p>
+     - *Thymeleaf* -> Thymeleaf is a contemporary Java-based template engine designed to simplify the creation of dynamic web pages.
+  <p><p>  
+   - JPA -> The JPA (Java Persistence API) dependency is like the bridge between your Java application and your relational database. When included in the project, it essentially taps into a standardized way of managing relational data in the Java application.
+  <p><p>
+     - H2 -> H2 stands out as a swift, freely accessible, in-memory database entirely crafted in Java. It allows to build and experiment with applications without the having to set up a separate database server.
+<p><p>
+ <p><p>
+3. Generate the dependencies and download the project, by extracting the files to the CA2 Part2 folder.
+ <p><p>
+ <p><p>
+4. Open the project in IntelliJ in order to delete de src folder and copy the src folder fromCA1_Part 1 to the project folder, along with the webpack.config.js and the package.json files.
 
-After creating the branch, switch to it by typing:
+<p><p>
+ <p><p>
+ 5. Delete the src/main/resources/static/built/ folder.
+<p><p>
+ <p><p>
+ 6. Change javax.persistence imports to jakarta.persistence in the Employee.java class.
+
+<p><p>
+ <p><p>
+
+### 2. Gradle's Implementation Changes
+  <p><p>
+1. Add the gradle plugin org.siouan.frontend to the project so that gradle is also able to manage the frontend. Since the project was already the java 17 version, I added the correspondent:
+
+<p><p>
+
 ```bash
-git checkout tut-basic-gradle
+*  id "org.siouan.frontend-jdk17" version "8.0.0"
 ```
 
-1. Go to [this website](https://start.spring.io) to generate a new gradle spring boot project. Fill in the necessary information and add the needed dependencies according to the image below:
-![img_1.png](Images/img.png)
+<p><p><p><p>
+  2. Add the package manager to the build.gradle file that allows to configure the package.json file, before the scripts section:<p><p>
 
-2. Click on the "Generate" button and download the project. Extract the files to the CA2 Part2 folder.
-
-3. Open the project in IntelliJ and delete de **src** folder.
-
-4. Copy the **src** folder from Class Assignment 1 Part 1 to the project folder.
-5. Copy the **webpack.config.js** and the **package.json** files from Class Assignment 1 Part 1 to the project folder.
-6. Delete the **src/main/resources/static/built/** folder.
-7. In the **Employee.java** class, change all *javax.persistence* imports to *jakarta.persistence*.
-
-## Implementing Changes
-### Part 1: Adding the frontend plugin
-
-For this first section, the goal is to add a frontend plugin to our gradle project. The steps to do so are:
-
-1. Open the build.gradle file and add the plugin:
-```gradle
- id "org.siouan.frontend-jdk17" version "8.0.0"
+```bash
+*  "packageManager": "npm@9.6.7",
 ```
 
-2. Configure the plugin in the same build.gradle file:
-```gradle
+<p><p><p><p>
+3. Add also the following code in build.gradle to configure the previous plug-in: <p><p>
+ 
+```bash
  frontend {
 nodeVersion = "16.20.2"
 assembleScript = "run build"
@@ -62,8 +93,12 @@ checkScript = "run check"
 }
 ```
 
-3. Add the dependencies in the build.gradle file:
-```gradle
+ <p><p>
+ <p><p>
+ 4. Update the scripts section/object in package.json to configure the execution of
+webpack:  <p><p>
+
+```bash
 "scripts": {
 "webpack": "webpack",
 "build": "npm run webpack",
@@ -73,213 +108,229 @@ checkScript = "run check"
 "test": "echo Testing frontend"
 },
 ```
-4. Add the package manager to the build.gradle file, before the scripts section:
-```gradle
-"packageManager": "npm@9.6.7",
-```
 
-5. Compile the project in the terminal(first navigate to the project folder):
+  <p><p><p><p>
+5. Compile the project in the terminal:<p><p>
+
 ```bash
-./gradlew build
+* ./gradlew build
+* ./gradlew bootRun
 ```
 
-### Part 2: Adding the copyJar task
+<p><p><p><p>
+6. Copy the generated jar to a folder named ”dist” located a the project root folder level, compile it and then commit/push it to the repository: <p><p>
 
-For this part of the assignment, a new task will be added to copy the generated Jar file. The steps to do so are:
 
-1. Open the build.gradle file and add the task:
-```gradle
+```bash
 task copyJar(type: Copy, dependsOn: build) {
 	from 'build/libs/'
 	into 'dist'
 	include '*.jar'
 }
+* ./gradlew build
+* git add .
+* git commit -m "#15 Added copyJar task"
+* git push
 ```
 
-2. Compile the project in the terminal(first navigate to the project folder):
-```bash
-./gradlew build
-```
-3. Add all te files to the staging area:
-```bash
-git add .
-```
-4. Commit the changes:
-```bash
-git commit -m "Added the copyJar task"
-```
-5. Push the changes to the repository:
-```bash
-git push
-```
+<p><p><p><p>
+7. Add a task to gradle to delete all the files generated by webpack(src/resources/main/static/built/).  It is executed as part of the clean task to ensure the project directory is clean before building. Afterwards, compile it and commit/push it to the repository: <p><p>
 
-### Part 3: Adding the deleteWebpackFiles task
-
-For this part of the assignment, a new task will be added to delete the files generated by the webpack. The steps to do so are:
-
-1. Open the build.gradle file and add the task:
-```gradle
+```bash
 task deleteWebpackFiles(type: Delete) {
 	delete 'src/main/resources/static/built'
 }
-```
-
-2. Add the following command to make sure this task is executed automatically by the task *clean*: 
-```gradle
 clean.dependsOn(deleteWebpackFiles)
+* ./gradlew build
+* git add .
+* git commit -m "#16 Added copyJar task"
+* git push
 ```
 
-3. Compile the project in the terminal(first navigate to the project folder):
-```bash
-./gradlew build
-```
-4. Add all te files to the staging area:
-```bash
-git add .
-```
-5. Commit the changes:
-```bash
-git commit -m "Added the deleteWebpackFiles task"
-```
-6. Push the changes to the repository:
-```bash
-git push
-```
-### Part 4: Merging the branches
+<p><p><p><p>
+8. Merge with the master branch: <p><p>
 
-Now we need to merge to the master branch. To do so, follow these steps:
-1. Switch to the master branch:
 ```bash
-git checkout master
-```
-2. Merge the tut-basic-gradle branch:
-```bash
-git merge --no-ff tut-basic-gradle
-```
-3. Push the changes to the repository:
-```bash
-git push
+* git checkout master
+* git merge --no-ff tut-basic-gradle
+* git push
 ```
 
+<p><p><p><p>
+9. Tag the assignment with ca2-part2:  <p><p>
 
-## Alternative implementation solution
-An alternative solution to the assignment would be to use a different solution for the build automation tool. Instead of using Gradle, we could use Maven. Maven is a build automation tool used primarily for Java projects. It is similar to Gradle but uses an XML file to define the project's structure and dependencies. The steps to implement the changes using Maven would be:
-1. Create a new Maven project by using the following command:
 ```bash
-mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+* git tag ca2-part2
+* git push origin ca2-part2
 ```
-2. Add the frontend plugin to the project by adding the following code to the pom.xml file:
-```xml
+
+<p><p><p><p>
+
+## Alternative Implementation - Maven
+<p><p><p><p>
+
+A good alternative to Gradle for the project's build automation would be Maven since it can be a viable option. Maven, like Gradle, is a widely used tool for managing Java projects, but it operates using a different approach. Instead of the Gradle DSL, Maven employs an XML file called pom.xml to organize the project's structure and dependencies.<p><p>
+Here's how I can implement Maven to the project:
+
+<p><p>
+<p><p>
+1. To begin, I should start a new Maven SpringBoot project following the steps that have already been done by done through the tutorial, using the link (https://start.spring.io) with the following dependencies: Rest Repositories; Thymeleaf; JPA; H2.
+<p><p><p><p>
+
+2. Add the frontend-maven-plugin to the project by adding this code to the pom.xml file: <p><p>
+
+```bash
 <plugin>
-<groupId>com.github.eirslett</groupId>
-<artifactId>frontend-maven-plugin</artifactId>
-<version>1.11.0</version>
-<configuration>
-<nodeVersion>v16.20.2</nodeVersion>
-<workingDirectory>src/main/resources/static</workingDirectory>
-</configuration>
-<executions>
-<execution>
-<id>install node and npm</id>
-<goals>
-<goal>install-node-and-npm</goal>
-</goals>
-</execution>
-<execution>
-<id>npm install</id>
-<goals>
-<goal>npm</goal>
-<configuration>
-<arguments>install</arguments>
-</configuration>
-</goals>
-</execution>
-<execution>
-<id>npm run build</id>
-<goals>
-<goal>npm</goal>
-<configuration>
-<arguments>run build</arguments>
-</configuration>
-</goals>
-</execution>
-</executions>
+    <groupId>com.github.eirslett</groupId>
+    <artifactId>frontend-maven-plugin</artifactId>
+    <version>1.9.1</version>
+    <configuration>
+        <installDirectory>target</installDirectory>
+    </configuration>
+    <executions>
+        <execution>
+            <id>install node and npm</id>
+            <goals>
+                <goal>install-node-and-npm</goal>
+            </goals>
+            <configuration>
+                <nodeVersion>v12.14.0</nodeVersion>
+                <npmVersion>6.13.4</npmVersion>
+            </configuration>
+        </execution>
+        <execution>
+            <id>npm install</id>
+            <goals>
+                <goal>npm</goal>
+            </goals>
+            <configuration>
+                <arguments>install</arguments>
+            </configuration>
+        </execution>
+        <execution>
+            <id>webpack build</id>
+            <goals>
+                <goal>webpack</goal>
+            </goals>
+        </execution>
+    </executions>
 </plugin>
 ```
-3. Add the copyJar task to the project by adding the following code to the pom.xml file:
-```xml
+
+<p><p><p></p>
+3. Add copyJar task to the project's pom.xml file: <p></p>
+
+```bash
 <plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-resources-plugin</artifactId>
-<version>3.2.0</version>
-<executions>
-<execution>
-<id>copy-jar</id>
-<phase>package</phase>
-<goals>
-<goal>copy-resources</goal>
-</goals>
-<configuration>
-<outputDirectory>${project.build.directory}/dist</outputDirectory>
-<resources>
-<resource>
-<directory>${project.build.directory}</directory>
-<includes>
-<include>*.jar</include>
-</includes>
-</resource>
-</resources>
-</configuration>
-</execution>
-</executions>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-resources-plugin</artifactId>
+    <version>3.2.0</version>
+    <executions>
+        <execution>
+            <id>copy-jar</id>
+            <phase>package</phase>
+            <goals>
+                <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+                <outputDirectory>${project.basedir}/dist</outputDirectory>
+                <resources>
+                    <resource>
+                        <directory>${project.build.directory}</directory>
+                        <includes>
+                            <include>*.jar</include>
+                        </includes>
+                    </resource>
+                </resources>
+            </configuration>
+        </execution>
+    </executions>
 </plugin>
 ```
-4. Add the deleteWebpackFiles task to the project by adding the following code to the pom.xml file:
-```xml
+
+<p><p><p></p>
+4. Add deleteWebpackFiles task to the project's pom.xml file: <p></p>
+
+```bash
 <plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-clean-plugin</artifactId>
-<version>3.1.0</version>
-<executions>
-<execution>
-<id>delete-webpack-files</id>
-<phase>clean</phase>
-<goals>
-<goal>clean</goal>
-</goals>
-<configuration>
-<filesets>
-<fileset>
-<directory>src/main/resources/static/built</directory>
-<includes>
-<include>*</include>
-</includes>
-</fileset>
-</filesets> 
-</configuration>
-</execution>
-</executions>
+    <artifactId>maven-clean-plugin</artifactId>
+    <version>3.1.0</version>
+    <configuration>
+        <filesets>
+            <fileset>
+                <directory>${project.basedir}/src/main/resources/static/built</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </fileset>
+        </filesets>
+    </configuration>
 </plugin>
 ```
-5. Compile the project by using the following command:
+
+<p><p><p></p>
+5. Compile the Maven project: <p></p>
+
 ```bash
 mvn clean install
-```
-6. Add all the files to the staging area by using the following command:
-```bash
 git add .
-```
-7. Commit the changes by using the following command:
-```bash
-git commit -m "Added the Maven build automation tool"
-```
-8. Push the changes to the repository by using the following command:
-```bash
+git commit -m "#17 Added the Maven build automation tool"
 git push
 ```
-By following these steps, the assignment can be completed using Maven as the build automation tool instead of Gradle. This alternative solution provides a different approach to implementing the changes required for the assignment and demonstrates the flexibility of using different build automation tools for Java projects.
+<p><p><p></p>
+<p><p><p></p>
 
-## Final Remarks
-The project compiled correctly and the frontend plugin was working as expected. The copyJar and deleteWebpackFiles tasks were added successfully and the project was merged to the master branch. The assignment was completed successfully and the changes were pushed to the repository.
+## Gradle VS Maven
 
+<p><p><p></p>
 
+### Maven:
+<p><p><p></p>
+
+**Pros**
+
+<p><p>
+* Convention over Configuration: Maven follows a convention-based approach, reducing the need for explicit configuration.
+* Widespread Adoption: Maven is extensively used in the Java ecosystem, making it easier to find resources and support.
+* Robust Dependency Management: Maven's dependency management system is mature and well-established.
+* Stable Build System: Maven's build process is predictable and stable, which can be advantageous for large projects.
+* Rich Plugin Ecosystem: Maven has a vast array of plugins available for extending its functionality.
+
+ <p><p><p></p>
+ 
+**Cons**
+<p><p>
+* Limited Flexibility: Maven's convention-based approach can be restrictive for complex or non-standard project setups.
+* XML Configuration: Maven's configuration is done through XML, which some developers find verbose and less readable.
+* Slow Performance: Maven's build process can be slower compared to Gradle, especially for large projects.
+* Limited Support for Incremental Builds: Maven's incremental build capabilities are not as advanced as Gradle's, leading to longer build times for iterative development.
+* Less Concise Syntax: Maven's XML configuration can result in more verbose build scripts compared to Gradle's Groovy DSL.
+
+<p><p><p></p>
+
+### Gradle
+
+<p><p>
+	
+**Pros**
+
+<p><p>
+* Flexibility and Customization: Gradle offers a highly flexible and customizable build system, allowing for complex project setups and custom workflows.
+* Groovy DSL: Gradle's build scripts are written in Groovy, which provides a concise and expressive syntax.
+* Incremental Builds: Gradle's advanced incremental build capabilities can significantly reduce build times, especially for iterative development.
+* Performance: Gradle is known for its fast build times, particularly for large projects.
+* Modern Build System: Gradle is designed with modern development practices in mind, making it suitable for a wide range of project types, including Android and Kotlin.
+
+<p><p>
+	
+**Cons**
+	
+<p><p>
+* Learning Curve: Gradle has a steeper learning curve compared to Maven, particularly for developers unfamiliar with Groovy.
+* Complexity: Gradle's flexibility can sometimes lead to complex build scripts, which may be challenging to maintain.
+* Less Widespread Adoption: Although Gradle is gaining popularity, it's still not as widely adopted as Maven in the Java ecosystem.
+* Plugin Compatibility: While Gradle has a rich plugin ecosystem, compatibility issues with certain plugins may arise due to its evolving nature.
+* Dynamic Dependency Resolution: Gradle's dynamic dependency resolution can sometimes lead to unexpected behavior if not managed properly.
+
+<p><p><p><p>
+	In summary, Maven offers simplicity and stability, making it a suitable choice for straightforward projects with standard requirements. On the other hand, Gradle provides flexibility, performance, and modern features, making it ideal for complex projects and teams looking for more advanced build capabilities.
