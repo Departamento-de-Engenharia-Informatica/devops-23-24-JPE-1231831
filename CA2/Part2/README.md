@@ -1,57 +1,285 @@
-<strong>Repository:</strong> devops-23-24-JPE-PSM-1231831
- <p></p>
-
-# Class Assignment 2 - Part 2
- <p></p>
-
-<p></p>
-
-<strong>Student: </strong>
-Inês Guedes
- <p></p>
-
-<strong>Number:</strong>
-1231831
-<p></p>
-<p></p>
-<p></p>
+# Class Assignment 2
 
 ## Introduction
-<p><p>
-In the DevOps class we were challenged to work with Gradle. This repository is the result of the work developed in the context of the second assignment part 2 of the class.
-The repository is organized as it follows:
 
-<p></p>
+Using our personal repositories and a simple Gradle application to add new functionality was the aim of this class assignment. The objective is to learn how to change the build and comprehend how a gradle wrapper functions, despite the fact that the capabilities are basic.Gradle file
+The final result of the assignment can be found [here](https://github.com/PedroMSFernandes5/DevOps-23-24-JPE-1231850).
 
-## 1. Tutorial: Application conversion to Gradle
-<p></p>
-1. Create a new branch called "tut-basic-gradle" in the repository and switch to it:
-<p>
- 
+## Table of Contents
+
+1. [Getting Started](#Getting-started)
+2. [Implementing Changes](#Implementing-Changes)
+    - [Part 1: Adding the frontend plugin](#Part-1-Adding-the-frontend-plugin)
+    - [Part 2: Adding the copyJar task](#Part-2-Adding-the-copyJar-task)
+    - [Part 3: Adding the deleteWebpackFiles task](#Part-3-Adding-the-deleteWebpackFiles-task)
+    - [Part 4: Merging the branches](#Part-4-Merging-the-branches)
+3. [Issues](#Issues)
+4. [Alternative implementation solution](#Alternative-implementation-solution)
+5. [Final Remarks](#Final-Remarks)
+
+
+## Getting Started
+
+The first step is to create a new branch called "tut-basic-gradle" in the repository to work on the assignment. To do so, open a git bash and type in the command:
 ```bash
-* git branch tut-basic-gradle
-* git checkout tut-basic-gradle
+git branch tut-basic-gradle
 ```
-<p><p>
-<p><p>
-2. Generate a new gradle spring boot project on the recommended site (https://start.spring.io/) by choosing the dependencies which will be working on:
- <p><p>
-           - Rest Repositories -> When the "Rest Repositories" dependency is added to the Spring Boot project, it essentially taps into the power of Spring Data REST. This module takes care of exposing the JPA repositories as RESTful endpoints without having to dive into the writing of controller code.
-        <p><p>
-           - Thymeleaf -> Thymeleaf is a contemporary Java-based template engine designed to simplify the creation of dynamic web pages.
-        <p><p>  
-         - JPA -> The JPA (Java Persistence API) dependency is like the bridge between your Java application and your relational database. When included in the project, it essentially taps into a standardized way of managing relational data in the Java application.
-        <p><p>
-           - H2 -> H2 stands out as a swift, freely accessible, in-memory database entirely crafted in Java. It allows to build and experiment with applications without the having to set up a separate database server.
-<p><p>
- <p><p>
-3. Generate the dependencies and download the project, by extracting the files to the CA2 Part2 folder.
- <p><p>
- <p><p>
-4. Open the project in IntelliJ in order to delete de src folder.
- <p><p>
- <p><p>
-5. Copy the src folder from Class Assignment 1 Part 1 to the project folder.
-   <p><p>
- <p><p>
-6. Copy the webpack.config.js and the package.json files from Class Assignment 1 Part 1 to the project folder.
+
+After creating the branch, switch to it by typing:
+```bash
+git checkout tut-basic-gradle
+```
+
+1. Go to [this website](https://start.spring.io) to generate a new gradle spring boot project. Fill in the necessary information and add the needed dependencies according to the image below:
+![img_1.png](Images/img.png)
+
+2. Click on the "Generate" button and download the project. Extract the files to the CA2 Part2 folder.
+
+3. Open the project in IntelliJ and delete de **src** folder.
+
+4. Copy the **src** folder from Class Assignment 1 Part 1 to the project folder.
+5. Copy the **webpack.config.js** and the **package.json** files from Class Assignment 1 Part 1 to the project folder.
+6. Delete the **src/main/resources/static/built/** folder.
+7. In the **Employee.java** class, change all *javax.persistence* imports to *jakarta.persistence*.
+
+## Implementing Changes
+### Part 1: Adding the frontend plugin
+
+For this first section, the goal is to add a frontend plugin to our gradle project. The steps to do so are:
+
+1. Open the build.gradle file and add the plugin:
+```gradle
+ id "org.siouan.frontend-jdk17" version "8.0.0"
+```
+
+2. Configure the plugin in the same build.gradle file:
+```gradle
+ frontend {
+nodeVersion = "16.20.2"
+assembleScript = "run build"
+cleanScript = "run clean"
+checkScript = "run check"
+}
+```
+
+3. Add the dependencies in the build.gradle file:
+```gradle
+"scripts": {
+"webpack": "webpack",
+"build": "npm run webpack",
+"check": "echo Checking frontend",
+"clean": "echo Cleaning frontend",
+"lint": "echo Linting frontend",
+"test": "echo Testing frontend"
+},
+```
+4. Add the package manager to the build.gradle file, before the scripts section:
+```gradle
+"packageManager": "npm@9.6.7",
+```
+
+5. Compile the project in the terminal(first navigate to the project folder):
+```bash
+./gradlew build
+```
+
+### Part 2: Adding the copyJar task
+
+For this part of the assignment, a new task will be added to copy the generated Jar file. The steps to do so are:
+
+1. Open the build.gradle file and add the task:
+```gradle
+task copyJar(type: Copy, dependsOn: build) {
+	from 'build/libs/'
+	into 'dist'
+	include '*.jar'
+}
+```
+
+2. Compile the project in the terminal(first navigate to the project folder):
+```bash
+./gradlew build
+```
+3. Add all te files to the staging area:
+```bash
+git add .
+```
+4. Commit the changes:
+```bash
+git commit -m "Added the copyJar task"
+```
+5. Push the changes to the repository:
+```bash
+git push
+```
+
+### Part 3: Adding the deleteWebpackFiles task
+
+For this part of the assignment, a new task will be added to delete the files generated by the webpack. The steps to do so are:
+
+1. Open the build.gradle file and add the task:
+```gradle
+task deleteWebpackFiles(type: Delete) {
+	delete 'src/main/resources/static/built'
+}
+```
+
+2. Add the following command to make sure this task is executed automatically by the task *clean*: 
+```gradle
+clean.dependsOn(deleteWebpackFiles)
+```
+
+3. Compile the project in the terminal(first navigate to the project folder):
+```bash
+./gradlew build
+```
+4. Add all te files to the staging area:
+```bash
+git add .
+```
+5. Commit the changes:
+```bash
+git commit -m "Added the deleteWebpackFiles task"
+```
+6. Push the changes to the repository:
+```bash
+git push
+```
+### Part 4: Merging the branches
+
+Now we need to merge to the master branch. To do so, follow these steps:
+1. Switch to the master branch:
+```bash
+git checkout master
+```
+2. Merge the tut-basic-gradle branch:
+```bash
+git merge --no-ff tut-basic-gradle
+```
+3. Push the changes to the repository:
+```bash
+git push
+```
+
+
+## Alternative implementation solution
+An alternative solution to the assignment would be to use a different solution for the build automation tool. Instead of using Gradle, we could use Maven. Maven is a build automation tool used primarily for Java projects. It is similar to Gradle but uses an XML file to define the project's structure and dependencies. The steps to implement the changes using Maven would be:
+1. Create a new Maven project by using the following command:
+```bash
+mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+```
+2. Add the frontend plugin to the project by adding the following code to the pom.xml file:
+```xml
+<plugin>
+<groupId>com.github.eirslett</groupId>
+<artifactId>frontend-maven-plugin</artifactId>
+<version>1.11.0</version>
+<configuration>
+<nodeVersion>v16.20.2</nodeVersion>
+<workingDirectory>src/main/resources/static</workingDirectory>
+</configuration>
+<executions>
+<execution>
+<id>install node and npm</id>
+<goals>
+<goal>install-node-and-npm</goal>
+</goals>
+</execution>
+<execution>
+<id>npm install</id>
+<goals>
+<goal>npm</goal>
+<configuration>
+<arguments>install</arguments>
+</configuration>
+</goals>
+</execution>
+<execution>
+<id>npm run build</id>
+<goals>
+<goal>npm</goal>
+<configuration>
+<arguments>run build</arguments>
+</configuration>
+</goals>
+</execution>
+</executions>
+</plugin>
+```
+3. Add the copyJar task to the project by adding the following code to the pom.xml file:
+```xml
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-resources-plugin</artifactId>
+<version>3.2.0</version>
+<executions>
+<execution>
+<id>copy-jar</id>
+<phase>package</phase>
+<goals>
+<goal>copy-resources</goal>
+</goals>
+<configuration>
+<outputDirectory>${project.build.directory}/dist</outputDirectory>
+<resources>
+<resource>
+<directory>${project.build.directory}</directory>
+<includes>
+<include>*.jar</include>
+</includes>
+</resource>
+</resources>
+</configuration>
+</execution>
+</executions>
+</plugin>
+```
+4. Add the deleteWebpackFiles task to the project by adding the following code to the pom.xml file:
+```xml
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-clean-plugin</artifactId>
+<version>3.1.0</version>
+<executions>
+<execution>
+<id>delete-webpack-files</id>
+<phase>clean</phase>
+<goals>
+<goal>clean</goal>
+</goals>
+<configuration>
+<filesets>
+<fileset>
+<directory>src/main/resources/static/built</directory>
+<includes>
+<include>*</include>
+</includes>
+</fileset>
+</filesets> 
+</configuration>
+</execution>
+</executions>
+</plugin>
+```
+5. Compile the project by using the following command:
+```bash
+mvn clean install
+```
+6. Add all the files to the staging area by using the following command:
+```bash
+git add .
+```
+7. Commit the changes by using the following command:
+```bash
+git commit -m "Added the Maven build automation tool"
+```
+8. Push the changes to the repository by using the following command:
+```bash
+git push
+```
+By following these steps, the assignment can be completed using Maven as the build automation tool instead of Gradle. This alternative solution provides a different approach to implementing the changes required for the assignment and demonstrates the flexibility of using different build automation tools for Java projects.
+
+## Final Remarks
+The project compiled correctly and the frontend plugin was working as expected. The copyJar and deleteWebpackFiles tasks were added successfully and the project was merged to the master branch. The assignment was completed successfully and the changes were pushed to the repository.
+
+
