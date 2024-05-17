@@ -294,21 +294,21 @@ git push
 **Pros**
 
 <p><p>
-* Convention over Configuration: Maven follows a convention-based approach, reducing the need for explicit configuration.
-* Widespread Adoption: Maven is extensively used in the Java ecosystem, making it easier to find resources and support.
-* Robust Dependency Management: Maven's dependency management system is mature and well-established.
-* Stable Build System: Maven's build process is predictable and stable, which can be advantageous for large projects.
-* Rich Plugin Ecosystem: Maven has a vast array of plugins available for extending its functionality.
+* Convention over Configuration: Maven follows a convention-based approach, reducing the need for explicit configuration.<p><p>
+* Widespread Adoption: Maven is extensively used in the Java ecosystem, making it easier to find resources and support.<p><p>
+* Robust Dependency Management: Maven's dependency management system is mature and well-established.<p><p>
+* Stable Build System: Maven's build process is predictable and stable, which can be advantageous for large projects.<p><p>
+* Rich Plugin Ecosystem: Maven has a vast array of plugins available for extending its functionality.<p><p>
 
  <p><p><p></p>
  
 **Cons**
 <p><p>
-* Limited Flexibility: Maven's convention-based approach can be restrictive for complex or non-standard project setups.
-* XML Configuration: Maven's configuration is done through XML, which some developers find verbose and less readable.
-* Slow Performance: Maven's build process can be slower compared to Gradle, especially for large projects.
-* Limited Support for Incremental Builds: Maven's incremental build capabilities are not as advanced as Gradle's, leading to longer build times for iterative development.
-* Less Concise Syntax: Maven's XML configuration can result in more verbose build scripts compared to Gradle's Groovy DSL.
+* Limited Flexibility: Maven's convention-based approach can be restrictive for complex or non-standard project setups.<p><p>
+* XML Configuration: Maven's configuration is done through XML, which some developers find verbose and less readable.<p><p>
+* Slow Performance: Maven's build process can be slower compared to Gradle, especially for large projects.<p><p>
+* Limited Support for Incremental Builds: Maven's incremental build capabilities are not as advanced as Gradle's, leading to longer build times for iterative development.<p><p>
+* Less Concise Syntax: Maven's XML configuration can result in more verbose build scripts compared to Gradle's Groovy DSL.<p><p>
 
 <p><p><p></p>
 
@@ -319,22 +319,22 @@ git push
 **Pros**
 
 <p><p>
-* Flexibility and Customization: Gradle offers a highly flexible and customizable build system, allowing for complex project setups and custom workflows.
-* Groovy DSL: Gradle's build scripts are written in Groovy, which provides a concise and expressive syntax.
-* Incremental Builds: Gradle's advanced incremental build capabilities can significantly reduce build times, especially for iterative development.
-* Performance: Gradle is known for its fast build times, particularly for large projects.
-* Modern Build System: Gradle is designed with modern development practices in mind, making it suitable for a wide range of project types, including Android and Kotlin.
+* Flexibility and Customization: Gradle offers a highly flexible and customizable build system, allowing for complex project setups and custom workflows. <p><p>
+* Groovy DSL: Gradle's build scripts are written in Groovy, which provides a concise and expressive syntax. <p><p>
+* Incremental Builds: Gradle's advanced incremental build capabilities can significantly reduce build times, especially for iterative development.<p><p>
+* Performance: Gradle is known for its fast build times, particularly for large projects.<p><p>
+* Modern Build System: Gradle is designed with modern development practices in mind, making it suitable for a wide range of project types, including Android and Kotlin.<p><p>
 
 <p><p>
 	
 **Cons**
 	
 <p><p>
-* Learning Curve: Gradle has a steeper learning curve compared to Maven, particularly for developers unfamiliar with Groovy.
-* Complexity: Gradle's flexibility can sometimes lead to complex build scripts, which may be challenging to maintain.
-* Less Widespread Adoption: Although Gradle is gaining popularity, it's still not as widely adopted as Maven in the Java ecosystem.
-* Plugin Compatibility: While Gradle has a rich plugin ecosystem, compatibility issues with certain plugins may arise due to its evolving nature.
-* Dynamic Dependency Resolution: Gradle's dynamic dependency resolution can sometimes lead to unexpected behavior if not managed properly.
+* Learning Curve: Gradle has a steeper learning curve compared to Maven, particularly for developers unfamiliar with Groovy.<p><p>
+* Complexity: Gradle's flexibility can sometimes lead to complex build scripts, which may be challenging to maintain.<p><p>
+* Less Widespread Adoption: Although Gradle is gaining popularity, it's still not as widely adopted as Maven in the Java ecosystem.<p><p>
+* Plugin Compatibility: While Gradle has a rich plugin ecosystem, compatibility issues with certain plugins may arise due to its evolving nature.<p><p>
+* Dynamic Dependency Resolution: Gradle's dynamic dependency resolution can sometimes lead to unexpected behavior if not managed properly.<p><p>
 
 <p><p><p><p>
 	In summary, Maven offers simplicity and stability, making it a suitable choice for straightforward projects with standard requirements. On the other hand, Gradle provides flexibility, performance, and modern features, making it ideal for complex projects and teams looking for more advanced build capabilities.
