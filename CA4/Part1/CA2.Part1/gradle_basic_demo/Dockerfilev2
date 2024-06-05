@@ -1,0 +1,24 @@
+# Use an official Ubuntu base image
+FROM ubuntu:20.04
+LABEL author="inesc"
+
+# Install Java (OpenJDK 17 in this case) and Git
+RUN apt-get update && \
+    apt-get install -y openjdk-17-jre-headless git && \
+    apt-get clean
+
+# Set JAVA_HOME environment variable
+ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
+ENV PATH $PATH:$JAVA_HOME/bin
+
+# Now we will make the directory for the application
+WORKDIR /opt/chat-app
+
+# Copy the built jar file from the host into the Docker image
+COPY ./build/libs/basic_demo-0.1.0.jar /opt/chat-app/basic_demo-0.1.0.jar
+
+# Expose the application port
+EXPOSE 59001
+
+# Run the application
+CMD ["java", "-cp", "/opt/chat-app/basic_demo-0.1.0.jar", "basic_demo.ChatServerApp", "59001"]
