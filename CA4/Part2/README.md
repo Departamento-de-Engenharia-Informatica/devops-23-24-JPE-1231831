@@ -35,24 +35,30 @@ In the DevOps class, we were challenged to work with Docker and leverage it to e
 <p></p>
 
 ```bash
-FROM ubuntu:22.04
-LABEL authors="inesc"
 
-RUN apt-get update -y
+# Use the Tomcat 10 image with JDK 17 based on Temurin
+FROM tomcat:10.0.20-jdk17-temurin
 
-RUN apt-get install -y openjdk-17-jdk
-RUN apt-get install wget -y
+# Update package lists and install necessary dependencies
+RUN apt-get update -y && \
+    apt-get install sudo nano git nodejs npm -f -y && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /usr/src/app
+RUN git clone https://github.com/Departamento-de-Engenharia-Informatica/devops-23-24-JPE-1231831.git
 
-WORKDIR /usr/src/app/
 
-RUN wget https://repo1.maven.org/maven2/com/h2database/h2/2.2.224/h2-2.2.224.jar
+# Navigate to the React and Spring Data REST project directory
+WORKDIR /tmp/build/devops-23-24-JPE-1231831/CA2/Part2/react-and-spring-data-rest-basic
+# Make the Gradle wrapper executable
+RUN chmod +x gradlew
 
-EXPOSE 8082
-EXPOSE 9092
+# Build the Spring Boot application with Gradle and copy the WAR file to Tomcat's webapps directory
+RUN ./gradlew clean build && \
+    cp build/libs/react-and-spring-data-rest-basic-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/ && \
+    rm -Rf /tmp/build/
 
-CMD java -cp ./h2-2.2.224.jar org.h2.tools.Server -web -webAllowOthers -tcp -tcpAllowOthers -ifNotExists
+# Expose port 8080
+EXPOSE 8080
 ```
 
 <p></p>
@@ -61,36 +67,21 @@ CMD java -cp ./h2-2.2.224.jar org.h2.tools.Server -web -webAllowOthers -tcp -tcp
 #### Explanation
 <p></p>
 
-<b>FROM ubuntu:22.04:</b>  This specifies the base image to use for the Docker container, in this case, Ubuntu version 22.04. <p></p>
+<b>FROM tomcat:10.0.20-jdk17-temurin:</b> Specifies the base image to use, which is Tomcat 10 with JDK 17 based on Temurin. <p></p>
 
+<b>RUN apt-get update -y && \ apt-get install sudo nano git nodejs npm -f -y && \ apt-get clean && rm -rf /var/lib/apt/lists/*:</b> Updates the package lists and installs necessary dependencies for building the application. This includes sudo, nano, git, nodejs, and npm. Then, it cleans up after the installation to reduce the image size. <p></p>
 
-<b>LABEL authors="inesc":</b>  This adds metadata to the Docker image, specifying the author(s) of the image. <p></p>
+<b>RUN git clone https://github.com/Departamento-de-Engenharia-Informatica/devops-23-24-JPE-1231831.git:</b> Clones a Git repository containing the source code for the web application. <p></p>
 
+<b>WORKDIR /tmp/build/devops-23-24-JPE-1231831/CA2/Part2/react-and-spring-data-rest-basic:</b> Sets the working directory to the location of the React and Spring Data REST project within the cloned repository. <p></p>
 
-<b>RUN apt-get update -y:</b>  This updates the package lists for upgrades and installs. <p></p>
+<b>RUN chmod +x gradlew:</b> Makes the Gradle wrapper executable. Gradle is a build automation tool used for building Java projects. <p></p>
 
+<b>RUN ./gradlew clean build && \ cp build/libs/react-and-spring-data-rest-basic-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/ && \ rm -Rf /tmp/build/:</b> Builds the Spring Boot application using Gradle and copies the resulting WAR (Web Application Archive) file to the webapps directory of Tomcat, which is where Tomcat deploys web applications from. It then removes the temporary build directory to clean up. <p></p>
 
-<b>RUN apt-get install -y openjdk-17-jdk:</b>  This installs the OpenJDK 17 JDK package, which includes the Java Development Kit necessary for running Java applications. <p></p>
+<b>EXPOSE 8080:</b> Exposes port 8080, which is the default port on which Tomcat serves web applications. <p></p>
 
-
-<b>RUN apt-get install wget -y:</b>  This installs the wget package, a command-line tool for downloading files. <p></p>
-
-
-<b>RUN mkdir -p /usr/src/app:</b>  This creates a directory named /usr/src/app in the Docker container where the application files will be stored. <p></p>
-
-
-<b>WORKDIR /usr/src/app/:</b>  This sets the working directory inside the Docker container to /usr/src/app/, so subsequent commands will be executed in this directory. <p></p>
-
-
-<b>RUN wget https://repo1.maven.org/maven2/com/h2database/h2/2.2.224/h2-2.2.224.jar:</b>  This downloads the H2 database JAR file from Maven Central repository and saves it to the current working directory (/usr/src/app/). <p></p>
-
-
-<b>EXPOSE 8082 and EXPOSE 9092:</b>  These instructions expose ports 8082 and 9092 from the Docker container. However, these ports will not be accessible from outside the container unless they are explicitly mapped to host ports when running the container. <p></p>
-
-
-<b>CMD java -cp ./h2-2.2.224.jar org.h2.tools.Server -web -webAllowOthers -tcp -tcpAllowOthers -ifNotExists:</b> This command is executed when the Docker container starts. It starts the H2 database server with options to enable the web and TCP connections, allowing connections from other hosts, and creating the database if it doesn't exist. <p></p>
-
-
+<p></p>
 <p></p>
 
 ### 1.2. H2 Database Dockerfile:
