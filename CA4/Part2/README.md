@@ -31,14 +31,14 @@ In the DevOps class, we were challenged to work with Docker and leverage it to e
 
 <p></p>
 
-#### 1.1. Web Dockerfile:
+### 1.1. Web Dockerfile:
 <p></p>
 
 
 <p></p>
 <p></p>
 
-##### Explanation
+#### Explanation
 <p></p>
 
 <b> FROM: </b>
@@ -46,7 +46,7 @@ In the DevOps class, we were challenged to work with Docker and leverage it to e
 <p></p>
 <p></p>
 
-#### 1.2. H2 Database Dockerfile:
+### 1.2. H2 Database Dockerfile:
 
  <p></p>
 
@@ -74,7 +74,7 @@ CMD java -cp ./h2-2.2.224.jar org.h2.tools.Server -web -webAllowOthers -tcp -tcp
 <p></p>
 <p></p>
 
-##### Explanation
+#### Explanation
 <p></p>
 
 <b>FROM ubuntu:22.04:</b> This sets the base image as Ubuntu version 22.04. 
@@ -101,7 +101,7 @@ CMD java -cp ./h2-2.2.224.jar org.h2.tools.Server -web -webAllowOthers -tcp -tcp
 <p></p>
 <p></p>
 
-#### 1.3. Docker-Compose.yml file:
+### 1.3. Docker-Compose.yml file:
 <p></p>
 <p></p>
 
@@ -139,7 +139,7 @@ networks:
 <p></p>
 <p></p>
 
-##### Explanation
+#### Explanation
 <p></p>
 
 This is a Docker Compose file written in version 3.8 syntax. It defines two services, web and db, along with their configurations: <p></p>
@@ -169,7 +169,7 @@ This is a Docker Compose file written in version 3.8 syntax. It defines two serv
 <p></p> 
 <p></p> 
 
-#### 1.4. Building/Running of Containers
+### 1.4. Building/Running of Containers
 <p></p>
 To build and run the Docker containers with the docker files created, I used the following commands: <p></p>
 
