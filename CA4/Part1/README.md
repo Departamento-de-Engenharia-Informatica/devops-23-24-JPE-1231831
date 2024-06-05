@@ -28,9 +28,9 @@ Considering that Docker is a platform that simplifies the process of packaging, 
 ## Tutorial - Version 1 (Chat server inside the Dockerfile): 
 <p></p>
 <p></p>
-* 1 - I installed Docker Desktop and created an account. <p></p>
-* 2 - Then, I created a repository on Docker Hub and named it devops. <p></p>
-* 3 - I started with the assignment, by making sure that the Docker Desktop was running in the background. <p></p>
+ 1 - I installed Docker Desktop and created an account. <p></p>
+ 2 - Then, I created a repository on Docker Hub and named it devops. <p></p>
+ 3 - I started with the assignment, by making sure that the Docker Desktop was running in the background. <p></p>
 <p></p>
 
 ### 1. Creation of a Dockerfile
@@ -108,7 +108,7 @@ To build the docker image I used the following commands:
 <p></p>
 
 ```bash
-docker build -f CA4/Part1/CA2.Part1/gradle_basic_demo/Dockerfile -t inesc/chat-server:version1 .
+* docker build -f CA4/Part1/CA2.Part1/gradle_basic_demo/Dockerfile -t inesc/chat-server:version1 .
 
 ```
 <p></p>
@@ -148,7 +148,7 @@ After verifying that the docker image with the name inesc/chat-server:version 1 
 <p></p>
 
 ```bash
- docker run -p 59001:59001 inesc/chat-server:version1
+ * docker run -p 59001:59001 inesc/chat-server:version1
 
 ```
 
@@ -158,7 +158,7 @@ Then, to execute the chat client to connect to the server I used the following c
 
 
 ```bash
-./gradlew runClient
+* ./gradlew runClient
 
 ```
 
@@ -172,7 +172,7 @@ In terms of checking if the containers are running, I used the following command
 <p></p>
 
 ```bash
-docker ps
+* docker ps
 
 ```
 <p></p>
@@ -180,7 +180,7 @@ I also could've used this command to list all containers, including the stopped 
 <p></p>
 
 ```bash
-docker ps a-
+* docker ps a-
 
 ```
 
@@ -189,7 +189,7 @@ If I wanted to stop the container I should run this command:
 <p></p>
 
 ```bash
-docker stop <container_id> - the container id that is running represented on my Docker Hub repository.
+* docker stop <container_id> - the container id that is running represented on my Docker Hub repository.
 
 ```
 
@@ -198,8 +198,8 @@ To remove the container or the image created, I could've also used the following
 <p></p>
 
 ```bash
-docker rm <container_id> - removes the container
-docker rmi inesc/chat-server:version1 - removes the image
+* docker rm <container_id> - removes the container
+* docker rmi inesc/chat-server:version1 - removes the image
 
 ```
 
