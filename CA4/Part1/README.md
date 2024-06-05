@@ -28,9 +28,10 @@ Considering that Docker is a platform that simplifies the process of packaging, 
 ## Tutorial - Version 1 (Chat server inside the Dockerfile): 
 <p></p>
 <p></p>
-* 1 - I installed Docker Desktop and created an account.
-* 2 - Then, I created a repository on Docker Hub and named it devops.
-* 3 - I started with the assignment, by making sure that the Docker Desktop was running in the background.
+* 1 - I installed Docker Desktop and created an account. <p></p>
+* 2 - Then, I created a repository on Docker Hub and named it devops. <p></p>
+* 3 - I started with the assignment, by making sure that the Docker Desktop was running in the background. <p></p>
+<p></p>
 
 ### 1. Creation of a Dockerfile
 
