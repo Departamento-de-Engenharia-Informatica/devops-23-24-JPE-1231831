@@ -34,6 +34,26 @@ In the DevOps class, we were challenged to work with Docker and leverage it to e
 ### 1.1. Web Dockerfile:
 <p></p>
 
+```bash
+FROM ubuntu:22.04
+LABEL authors="inesc"
+
+RUN apt-get update -y
+
+RUN apt-get install -y openjdk-17-jdk
+RUN apt-get install wget -y
+
+RUN mkdir -p /usr/src/app
+
+WORKDIR /usr/src/app/
+
+RUN wget https://repo1.maven.org/maven2/com/h2database/h2/2.2.224/h2-2.2.224.jar
+
+EXPOSE 8082
+EXPOSE 9092
+
+CMD java -cp ./h2-2.2.224.jar org.h2.tools.Server -web -webAllowOthers -tcp -tcpAllowOthers -ifNotExists
+```
 
 <p></p>
 <p></p>
@@ -41,9 +61,36 @@ In the DevOps class, we were challenged to work with Docker and leverage it to e
 #### Explanation
 <p></p>
 
-<b> FROM: </b>
+<b>FROM ubuntu:22.04:</b>  This specifies the base image to use for the Docker container, in this case, Ubuntu version 22.04. <p></p>
 
-<p></p>
+
+<b>LABEL authors="inesc":</b>  This adds metadata to the Docker image, specifying the author(s) of the image. <p></p>
+
+
+<b>RUN apt-get update -y:</b>  This updates the package lists for upgrades and installs. <p></p>
+
+
+<b>RUN apt-get install -y openjdk-17-jdk:</b>  This installs the OpenJDK 17 JDK package, which includes the Java Development Kit necessary for running Java applications. <p></p>
+
+
+<b>RUN apt-get install wget -y:</b>  This installs the wget package, a command-line tool for downloading files. <p></p>
+
+
+<b>RUN mkdir -p /usr/src/app:</b>  This creates a directory named /usr/src/app in the Docker container where the application files will be stored. <p></p>
+
+
+<b>WORKDIR /usr/src/app/:</b>  This sets the working directory inside the Docker container to /usr/src/app/, so subsequent commands will be executed in this directory. <p></p>
+
+
+<b>RUN wget https://repo1.maven.org/maven2/com/h2database/h2/2.2.224/h2-2.2.224.jar:</b>  This downloads the H2 database JAR file from Maven Central repository and saves it to the current working directory (/usr/src/app/). <p></p>
+
+
+<b>EXPOSE 8082 and EXPOSE 9092:</b>  These instructions expose ports 8082 and 9092 from the Docker container. However, these ports will not be accessible from outside the container unless they are explicitly mapped to host ports when running the container. <p></p>
+
+
+<b>CMD java -cp ./h2-2.2.224.jar org.h2.tools.Server -web -webAllowOthers -tcp -tcpAllowOthers -ifNotExists:</b> This command is executed when the Docker container starts. It starts the H2 database server with options to enable the web and TCP connections, allowing connections from other hosts, and creating the database if it doesn't exist. <p></p>
+
+
 <p></p>
 
 ### 1.2. H2 Database Dockerfile:
