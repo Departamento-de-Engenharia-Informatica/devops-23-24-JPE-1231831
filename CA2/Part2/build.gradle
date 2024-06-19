@@ -2,14 +2,18 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.4'
 	id 'io.spring.dependency-management' version '1.1.4'
-	id "org.siouan.frontend-jdk17" version "8.0.0"
+	id 'org.siouan.frontend-jdk17' version '8.0.0'
 }
 
-group = 'com.greglturnquist'
+group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
 	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
 }
 
 frontend {
@@ -19,34 +23,29 @@ frontend {
 	checkScript = "run check"
 }
 
-repositories {
-	mavenCentral()
-}
-
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'com.h2database:h2:2.2.224'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
+	implementation 'com.h2database:h2:2.2.224'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
-task copyJar(type: Copy) {
-	dependsOn build
-
-	from "$buildDir/libs"
-	into "$projectDir/dist"
-
-	include "*.jar"
+task copyJarToDist(type: Copy, dependsOn: build) {
+	group = 'com.example'
+	from 'build/libs/'
+	into 'dist'
+	include '*.jar'
 }
 
-task cleanBuiltFiles(type: Delete) {
-	delete fileTree(dir: 'src/main/resources/static/built', include: '**/*')
+task deleteFilesWebpack(type: Delete) {
+	group = 'com.example'
+	delete 'src/resources/main/static/built/*'
 }
 
-clean.dependsOn(cleanBuiltFiles)
+clean.dependsOn(deleteFilesWebpack)
