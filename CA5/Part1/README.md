@@ -108,5 +108,7 @@ stages {
 
 <p></p>
 After that, I saved the pipeline and ran it. The built of the pipeline was successful as it is shown in the following image:
+<p></p>
+<p></p>
 
 ![JenkinsBuild.png](JenkinsBuild.png))
