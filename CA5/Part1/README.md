@@ -112,3 +112,146 @@ After that, I saved the pipeline and ran it. The built of the pipeline was succe
 <p></p>
 
 ![JenkinsBuild.png](JenkinsBuild.png))
+
+<p></p>
+<p></p>
+
+## Pipeline - Jenkins with SpringBoot
+
+<p></p>
+<p></p>
+
+For this part I wrote another pipeline, but this time the script will push the Docker image onto the DockerHub:
+
+ <p></p>
+ 
+```bash
+
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'
+        DOCKER_IMAGE = '1231831/ca2image'
+        DOCKER_TAG = "${env.BUILD_ID}"
+    }
+
+    stages {
+        stage('Checkout') {
+             steps {
+                 echo 'Checking out code from the repository'
+                 git branch: 'main', url: 'https://github.com/simao-campos87/devops-23-24-JPE-1231859.git](https://github.com/Departamento-de-Engenharia-Informatica/devops-23-24-JPE-1231831.git'
+               }
+        }
+
+        stage('Set Permissions') {
+            steps {
+                dir('CA2/Part2/react-and-spring-data-rest-basic') {
+                    echo 'Setting executable permissions on gradlew...'
+                    sh 'chmod +x gradlew'
+                }
+            }
+        }
+
+        stage('Assemble') {
+            steps {
+                retry(3) {
+                    dir('CA2/Part2/react-and-spring-data-rest-basic') {
+                        echo 'Assembling the application...'
+                        sh './gradlew assemble'
+                    }
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                dir('CA2/Part2/react-and-spring-data-rest-basic') {
+                    echo 'Running unit tests...'
+                    sh './gradlew test'
+                }
+            }
+        }
+
+        stage('Javadoc') {
+            steps {
+                dir('CA2/Part2/react-and-spring-data-rest-basic') {
+                    echo 'Generating Javadoc...'
+                    sh './gradlew javadoc'
+                    publishHTML(target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'build/docs/javadoc',
+                        reportFiles: 'index.html',
+                        reportName: 'Javadoc'
+                    ])
+                }
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                dir('CA2/Part2/react-and-spring-data-rest-basic') {
+                    echo 'Archiving artifacts...'
+                    archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
+                }
+            }
+        }
+
+        stage('Create Dockerfile') {
+            steps {
+                dir('CA2/Part2/react-and-spring-data-rest-basic') {
+                    script {
+                        def dockerfileContent = """
+                        FROM gradle:jdk21
+                        WORKDIR /app
+                        COPY build/libs/*.jar app.jar
+                        EXPOSE 8080
+                        ENTRYPOINT ["java", "-jar", "app.jar"]
+                        """
+                        writeFile file: 'Dockerfile', text: dockerfileContent
+                    }
+                }
+            }
+        }
+
+        stage('Publish Image') {
+            steps {
+                script {
+                    echo 'Building and publishing Docker image...'
+                    docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS_ID}") {
+                        dir('CA2/Part2/react-and-spring-data-rest-basic') {
+                            def customImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
+                            customImage.push()
+                            customImage.push('latest')
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                script {
+                    echo 'Running Docker container...'
+                    sh "docker run -d -p 8080:8080 ${DOCKER_IMAGE}:latest"
+                }
+            }
+        }
+    }
+}
+
+```
+c
+
+ Afterwards, with the intent of running the Docker image, I pulled the image from the Docker Hub and ran it:
+<p></p>
+ 
+ ```bash
+ pull 1231831/ca2image
+run -p 8080:8080 1231831/ca2image
+ ```
+
+<p><</p>
+ Finally, I could access the image by using the latest pre-defined port (http://localhost:8080).
